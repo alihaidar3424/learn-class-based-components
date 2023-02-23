@@ -11,9 +11,20 @@ class Users extends Component {
     }
   }
 
+  componentDidUpdate() {
+    // try {
+    //   someCodeWhichMightFail()
+    // } catch (err) {
+    //   // handle error
+    // }
+    if (this.props.users.length === 0) {
+      throw new Error('No users provided!');
+    }
+  }
+
   toggleUsersHandler() {
     this.setState((curState) => {
-      return {showUsers: !curState.showUsers}
+      return { showUsers: !curState.showUsers }
     });
   }
 
@@ -27,13 +38,13 @@ class Users extends Component {
     );
 
     return (
-    <div className={classes.users}>
-      <button onClick={this.toggleUsersHandler.bind(this)}>
-        {this.state.showUsers ? 'Hide' : 'Show'} Users
-      </button>
-      {this.state.showUsers && usersList}
-    </div>
-  );
+      <div className={classes.users}>
+        <button onClick={this.toggleUsersHandler.bind(this)}>
+          {this.state.showUsers ? 'Hide' : 'Show'} Users
+        </button>
+        {this.state.showUsers && usersList}
+      </div>
+    );
   }
 }
 
